@@ -13,7 +13,7 @@ ${APP_ACTIVITY}                      .Inicio
 Abrir App
     Open Application                                    http://127.0.0.1:4723 
     ...    automationName=${ANDROID_AUTOMATION_NAME}
-    ...    platformName=${ANDROID_PLATFORM_NAME}        platformVersion=${ANDROID_PLATFORM_VERSION}
+    ...    platformName=${ANDROID_PLATFORM_NAME}        platformVersion=${ANDROID_AUTOMATION_VERSION}
     ...    appPackage=${APP_PACKAGE}                    appActivity=${APP_ACTIVITY}
 
 Teardown

@@ -13,12 +13,13 @@ ${TECLADO_NORM}            xpath=/hierarchy/android.widget.FrameLayout/android.w
 ${PRODUTO_ACHADO1}         xpath=(//android.widget.LinearLayout[@resource-id="br.com.pztec.estoque:id/linha_parte1"])[1]
 ${PRODUTO_ACHADO2}         xpath=(//android.widget.LinearLayout[@resource-id="br.com.pztec.estoque:id/linha_parte1"])[2]
 #BOTÔES ///////////////////////////////////////
-${B_NOVO}                  xpath=///android.widget.Button[@resource-id="br.com.pztec.estoque:id/Button1"]
+${B_NOVO}                  id=br.com.pztec.estoque:id/Button1
+${B_MENU}                  id=br.com.pztec.estoque:id/Button3
 ${B_DELETAR}               xpath=//android.widget.Button[@resource-id="br.com.pztec.estoque:id/deletar"]
 ${B_EDITAR}                xpath=//android.widget.Button[@resource-id="br.com.pztec.estoque:id/editar"]
 ${B_ENTRADA}               xpath=///android.widget.Button[@resource-id="br.com.pztec.estoque:id/entrada"]
 ${B_SAIDA}                 xpath=//android.widget.Button[@resource-id="br.com.pztec.estoque:id/saida"]
-${B_SALVAR}                xpath=//android.widget.Button[@resource-id="br.com.pztec.estoque:id/btn_gravar_assunto"]
+${B_SALVAR}                id=br.com.pztec.estoque:id/btn_gravar_assunto
 ${SIM_EXCLUSAO}            xpath=//android.widget.Button[@resource-id="android:id/button1"]
 ${NAO_EXCLUSAO}            xpath=//android.widget.Button[@resource-id="android:id/button2"]
 #CAMPOS ///////////////////////////////////////
@@ -33,7 +34,7 @@ ${C_ADD_ESTOQUE}           xpath=//android.widget.EditText[@resource-id="br.com.
 ${C_MOTIVO}                xpath=//android.widget.EditText[@resource-id="br.com.pztec.estoque:id/txt_motivo"]
 ${C_DOC_REF}               xpath=//android.widget.EditText[@resource-id="br.com.pztec.estoque:id/txt_referencia"]
 ${C_DIM_ESTOQUE}           xpath=//android.widget.EditText[@resource-id="br.com.pztec.estoque:id/txt_qtdsaida"]
-
+${C_LOCALIZAR}             id=android:id/search_src_text
 
 #TEXTO ///////////////////////////////////////
 ${ID}                      xpath=//android.widget.TextView[@text="ID"]   #
@@ -69,11 +70,31 @@ ${CONF_EXCLUSAO}           xpath=/hierarchy/android.widget.FrameLayout
 ${T_MENSAGEM}              xpath=//android.widget.TextView[@resource-id="android:id/alertTitle"]
 ${T_CONF_EXCLUSAO}         xpath=//android.widget.TextView[@resource-id="android:id/message"]
 *** Keywords ***
+
+#0////////////////////////////////////
 Dado que o cliente está na página inicial
     Wait Until Element Is Visible    ${PAGINA_INICIAL}
-
 Quando ele clica em Novo
     Espera o elemento e clica nele    ${B_NOVO}
+Então deve conter os elementos da funcionalidade Novo
+    Wait Until Element Is Visible    ${C_CODIGO}   
+    Wait Until Element Is Visible    ${CODIGO}   
+    Wait Until Element Is Visible    ${C_DESCRICAO}   
+    Wait Until Element Is Visible    ${DESCRICAO}   
+    Wait Until Element Is Visible    ${C_UNIDADE}   
+    Wait Until Element Is Visible    ${UNIDADE}   
+    Wait Until Element Is Visible    ${C_QUANTIDADE}   
+    Wait Until Element Is Visible    ${QUANTIDADE}   
+    Wait Until Element Is Visible    ${C_VALUNIT} 
+    Wait Until Element Is Visible    ${VALUNIT}   
+    Wait Until Element Is Visible    ${C_LOTE}   
+    Wait Until Element Is Visible    ${LOTE}   
+    Wait Until Element Is Visible    ${C_CODIGO}   
+    Wait Until Element Is Visible    ${VALIDADE}   
+    Wait Until Element Is Visible    ${B_SALVAR}   
+  
+
+#1 & 2 ///////////////////////////////////
 E preenche o campo Código
     Espera o elemento e inputa um texto    ${C_CODIGO}    1420
 
@@ -97,7 +118,15 @@ Então deve ser possível cadastrar um produto com sucesso
     Espera o elemento e verifica conteúdo    ${QUANTIDADE}    1421
     Espera o elemento e verifica conteúdo    ${VALUNIT}    1421
     Espera o elemento e verifica conteúdo    ${LOTE}    1421
-#03
+
+#03////////////////////////////////////////
+E tem um produto cadastrado
+    Espera o elemento e clica nele    ${B_NOVO}
+    Espera o elemento e inputa um texto    ${C_DESCRICAO}    Chileno
+    Espera o elemento e inputa um texto    ${C_QUANTIDADE}    50
+    Espera o elemento e inputa um texto    ${C_VALUNIT}    100
+    Espera o elemento e clica nele    ${B_SALVAR}
+
 Quando ele clica em Entrada
     Espera o elemento e clica nele    ${B_ENTRADA}
 E preenche o campo Adicionar Estoque
@@ -105,7 +134,7 @@ E preenche o campo Adicionar Estoque
 Então deve ser possível acrescentar um produto com sucesso
     Espera o elemento e verifica conteúdo    ${QUANTIDADE}    7.0
 
-#04
+#04///////////////////////////////////////
 Quando ele clica em Saída
     Espera o elemento e clica nele    ${B_SAIDA}
 E preenche o campo Diminuir Estoque
@@ -113,7 +142,7 @@ E preenche o campo Diminuir Estoque
 Então deve ser possível decrementar um produto com sucesso
     Espera o elemento e inputa um texto    ${QUANTIDADE}     5.0
 
-#5
+#05////////////////////////////////////
 Quando ele clica em editar
 
 E altera o campo Descrição
@@ -124,17 +153,19 @@ E altera o campo Val.Unit
 
 Então deve ser possível editar um produto com sucesso
 
-#6
+#06/////////////////////////////////////
+Quando ele clica em excluir
 
+Então deve ser possível excluir um produto com sucesso
 
-#7
+#7//////////////////////////////////////
 
-#8
+#8//////////////////////////////////////
 
-#9
+#9//////////////////////////////////////
 
-#10
+#10/////////////////////////////////////
 
-#11
+#11/////////////////////////////////////
 
-#12
+#12/////////////////////////////////////
