@@ -9,19 +9,17 @@ Resource    ../pages/backup.page.robot
 
 TC- Deve ser possível fazer o Backup de um produto
     Dado que o cliente está na página inicial
-    E tem um produto cadastrado
-    Quando clica em Menu
-    E clica em Backup
-    E clica em Gerar Backup
+    E tem um produto cadastrado 
+    Quando selecionar a opção "Menu"
+    E acessar a opção "Backup"
     E confirma operação
-    Então deve gerar arquivo de Backup
+    Então deve "Gerar Backup" dos dados
 
 TC-Deve ser possível enviar um arquivo de Backup
     Dado que o cliente está na página inicial
     E tem um produto cadastrado
-    Quando clica em Menu
-    E clica em Backup
-    E clica em Gerar Backup
+    Quando selecionar a opção "Menu"
+    E acessar a opção "Backup"
     E confirma operação
-    E clica em enviar
+    E "Gerar Backup" dos dados
     Então deve enviar arquivo de Backup
