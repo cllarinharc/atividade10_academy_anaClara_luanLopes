@@ -64,20 +64,26 @@ ${T_MOTIVO}                xpath=//android.widget.TextView[@text="Motivo"]
 ${T_DOC_REF}               xpath=//android.widget.TextView[@text="Doc/Ref."]
 ${T_DIM_ESTOQUE_CIMA}      xpath=//android.widget.TextView[@resource-id="br.com.pztec.estoque:id/lbl_titulo"]
 ${T_DIM_ESTOQUE}           xpath=(//android.widget.TextView[@text="Diminuir estoque"])[2]
+${T_CONF_EXCLUSAO}         id=android:id/contentPanel
 
 #MENSAGEM //////////////////////////////////
 ${CONF_EXCLUSAO}           xpath=/hierarchy/android.widget.FrameLayout
 ${T_MENSAGEM}              xpath=//android.widget.TextView[@resource-id="android:id/alertTitle"]
 ${T_CONF_EXCLUSAO}         xpath=//android.widget.TextView[@resource-id="android:id/message"]
+
+#PESQUISAR////////////////////////////////////////////////////////
+${B_PESUISAR}              id=android:id/search_button     
+${C_PESUISAR}              id=android:id/search_src_text  
+
 *** Keywords ***
 
 #0////////////////////////////////////
 Dado que o cliente está na página inicial
-    Wait Until Element Is Visible    ${PAGINA_INICIAL}
+    verifica elemento    ${PAGINA_INICIAL}
 Quando ele clica em Novo
     Espera o elemento e clica nele    ${B_NOVO}
 Então deve conter os elementos da funcionalidade Novo
-    Wait Until Element Is Visible    ${C_CODIGO}   
+    Verifica elemento                ${C_CODIGO}   
     Wait Until Element Is Visible    ${CODIGO}   
     Wait Until Element Is Visible    ${C_DESCRICAO}   
     Wait Until Element Is Visible    ${DESCRICAO}   
@@ -112,12 +118,12 @@ E confirma operação
     Espera o elemento e clica nele    ${B_SALVAR}
 Então deve ser possível cadastrar um produto com sucesso
     Espera o elemento e verifica conteúdo    ${CODIGO}    1420
-    Espera o elemento e verifica conteúdo    ${DESCRICAO}    1421
-    Espera o elemento e verifica conteúdo    ${UNIDADE}    1421
-    Espera o elemento e verifica conteúdo    ${GRUPO}    1421
-    Espera o elemento e verifica conteúdo    ${QUANTIDADE}    1421
-    Espera o elemento e verifica conteúdo    ${VALUNIT}    1421
-    Espera o elemento e verifica conteúdo    ${LOTE}    1421
+    Espera o elemento e verifica conteúdo    ${DESCRICAO}    PlayStation 2
+    Espera o elemento e verifica conteúdo    ${UNIDADE}    3
+    Espera o elemento e verifica conteúdo    ${GRUPO}    Geral
+    Espera o elemento e verifica conteúdo    ${QUANTIDADE}    40
+    Espera o elemento e verifica conteúdo    ${VALUNIT}    2500
+    Espera o elemento e verifica conteúdo    ${LOTE}    1234
 
 #03////////////////////////////////////////
 E tem um produto cadastrado
@@ -144,28 +150,87 @@ Então deve ser possível decrementar um produto com sucesso
 
 #05////////////////////////////////////
 Quando ele clica em editar
-
+    Espera o elemento e clica nele    ${B_EDITAR}
 E altera o campo Descrição
-
+    Espera o elemento e inputa um texto    ${C_DESCRICAO}    PlayStation
 E altera o campo Quantidade
-    
+        Espera o elemento e inputa um texto    ${C_QUANTIDADE}    50
 E altera o campo Val.Unit
-
+    Espera o elemento e inputa um texto    ${C_VALUNIT}    2000
 Então deve ser possível editar um produto com sucesso
-
+    Espera o elemento e visualiza o conteúdo   ${PRODUTO_ACHADO1}
 #06/////////////////////////////////////
 Quando ele clica em excluir
+    Espera o elemento e clica nele    ${B_DELETAR}
+E confirma operação de exclusão
+    Espera o elemento e visualiza o conteúdo    ${T_CONF_EXCLUSAO}    
+    Espera o elemento e clica nele    ${SIM_EXCLUSAO}
 
 Então deve ser possível excluir um produto com sucesso
-
+    Espera o elemento e espera que esteja desabilitado    ${PRODUTO_ACHADO2}
 #7//////////////////////////////////////
+E desconfirma operação
+    Espera o elemento e visualiza o conteúdo    ${T_CONF_EXCLUSAO}    
+    Espera o elemento e clica nele    ${NAO_EXCLUSAO}
+Então deve ser possível cancelar exclusão de um produto com sucesso
+    Espera o elemento e verifica conteúdo    ${CODIGO}    1420
+    Espera o elemento e verifica conteúdo    ${DESCRICAO}    PlayStation 2
+    Espera o elemento e verifica conteúdo    ${UNIDADE}    3
+    Espera o elemento e verifica conteúdo    ${GRUPO}    Geral
+    Espera o elemento e verifica conteúdo    ${QUANTIDADE}    40
+    Espera o elemento e verifica conteúdo    ${VALUNIT}    2500
+    Espera o elemento e verifica conteúdo    ${LOTE}    1234
 
 #8//////////////////////////////////////
+Quando ele clica em pesquisar
+    Espera o elemento e clica nele    ${B_PESUISAR}
+E preenche com um valor conhecido de Quantidade
+    Espera o elemento e inputa um texto    ${C_PESUISAR}    40
+Então deve ser possível pesquisar um produto com sucesso
+    Espera o elemento e visualiza o conteúdo    ${PRODUTO_ACHADO1}    
 
 #9//////////////////////////////////////
+E preenche com um valor conhecido de Unidade
+    Espera o elemento e inputa um texto    ${C_PESUISAR}    3
 
 #10/////////////////////////////////////
+E preenche com um valor conhecido de Descrição
+    Espera o elemento e inputa um texto    ${C_PESUISAR}    PLayStation 2
 
 #11/////////////////////////////////////
+E preenche com um valor conhecido de Val.Unit
+    Espera o elemento e inputa um texto    ${C_PESUISAR}    2500
 
 #12/////////////////////////////////////
+Quando ele achar um produto
+    Espera o elemento e clica nele    ${B_PESUISAR}
+    Espera o elemento e inputa um texto    ${C_PESUISAR}    40
+    Espera o elemento e inputa um texto    ${C_PESUISAR}    PLayStation 2
+    Espera o elemento e visualiza o conteúdo    ${PRODUTO_ACHADO1}    
+Então deve ser possível identificar o campo ID 
+    Espera o elemento e visualiza o conteúdo    ${ID}
+    Espera o elemento e visualiza o conteúdo    ${R_ID}
+E deve ser possível identificar o campo Grupo
+    Espera o elemento e visualiza o conteúdo    ${GRUPO}
+#BAD REQUEST ///////////////////////////
+#13/////////////////////////////////////
+Então não deve ser possível cadastrar um produto com sucesso
+
+
+#14/////////////////////////////////////
+
+
+#15/////////////////////////////////////
+
+
+#16/////////////////////////////////////
+Então não deve ser possível preencher o campo Quantidade com teclado não numérico
+
+#17/////////////////////////////////////
+Então não deve ser possível preencher o campo Val.Unitcom teclado não numérico
+
+
+#18/////////////////////////////////////
+E preenche o campo Diminuir Estoque em 25 Unidades
+
+Então não deve ser possível decrementar um produto com sucesso
