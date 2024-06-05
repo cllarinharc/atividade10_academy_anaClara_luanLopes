@@ -3,6 +3,7 @@ Resource    ../base.robot
 Resource    ../utils/commons.robot
 
 *** Variables ***
+
 ${PAGINA_MENU}          xpath=//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.LinearLayout
 ${PAGINA_BACKUP}        xpath=//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.LinearLayout
 #BOTÕES////////////////////////////////////////////////////////////////////////
@@ -40,3 +41,6 @@ E clica em enviar
     Espera o elemento e clica nele    ${B_ENVIAR_BACKUP}
 Então deve enviar arquivo de Backup
     Espera o elemento e visualiza o conteúdo   ${OPCOES}
+
+
+

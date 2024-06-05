@@ -3,6 +3,7 @@ Resource    ../base.robot
 Resource    ../utils/commons.robot
 
 *** Variables ***
+
 ${PAGINA_MENU}        xpath=//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.LinearLayout
 ${PAGINA_RELATORIOS}        xpath=//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.LinearLayout
 ${PAGINA_INVENTARIO_ESTOQUE}        xpath=//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.LinearLayout
