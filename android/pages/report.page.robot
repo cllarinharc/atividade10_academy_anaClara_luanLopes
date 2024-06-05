@@ -74,6 +74,7 @@ Então deve ser possível Reportar Entradas de Estoque
 
 #4
 Então deve ser possível visualizar Entradas de Estoque
+    Espera o elemento e visualiza o conteúdo    ${B_VIZUALIZAR_PDF}
     Espera o elemento e clica nele    ${B_VIZUALIZAR_PDF}
 #5
 Então não deve ser possível Reportar Entradas de Estoque

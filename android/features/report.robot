@@ -3,7 +3,9 @@ Library    AppiumLibrary
 Resource    ../base.robot
 Resource    ../pages/produtos.page.robot
 Resource    ../pages/report.page.robot
-
+Test Timeout    4 minutes
+Test Setup        Abrir App
+Test Teardown     Teardown
 
 *** Test Cases ***
 
