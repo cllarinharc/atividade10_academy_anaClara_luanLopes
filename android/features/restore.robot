@@ -16,5 +16,8 @@ TC- Deve ser possivel Restaurar Backup
     Dado que o cliente está na página inicial
     Quando clica em Menu
     E clica em Restore
-    E clica no Selecionar arquivo
+    E clica em selecionar arquivo
+    E clica em Estoque
+    E clica em produtos.B_PRODUTOS_CSV
+    E confirma ok
     Então deve ser possível Restaurar Backup
