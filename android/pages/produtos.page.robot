@@ -4,25 +4,27 @@ Resource    ../utils/commons.robot
 
 *** Variables ***
 ${PAGINA_INICIAL}          id=///android.widget.LinearLayout[@resource-id="br.com.pztec.estoque:id/todoObjeto"]
-${PAGINA_NOVO}             xpath=//android.widget.ScrollView[@resource-id="br.com.pztec.estoque:id/scrollView1"]
+${PAGINA_NOVO}             id=br.com.pztec.estoque:id/scrollView1
 ${PAGINA_EDITAR}           xpath=//android.widget.ScrollView[@resource-id="br.com.pztec.estoque:id/scrollView1"]    #iguais
 ${PAGINA_ENTRADA}          xpath=//android.widget.ScrollView[@resource-id="br.com.pztec.estoque:id/scrollView1"]
 ${PAGINA_SAIDA}            xpath=//android.widget.ScrollView[@resource-id="br.com.pztec.estoque:id/scrollView1"]
 ${TECLADO_NORM}            xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout
+${TECLADO_NUMERICO}        id=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout
 
 ${PRODUTO_ACHADO1}         xpath=(//android.widget.LinearLayout[@resource-id="br.com.pztec.estoque:id/linha_parte1"])[1]
 ${PRODUTO_ACHADO2}         xpath=(//android.widget.LinearLayout[@resource-id="br.com.pztec.estoque:id/linha_parte1"])[2]
-#BOTÔES ///////////////////////////////////////
-${B_NOVO}                  id=br.com.pztec.estoque:id/Button1
+#BOTÔES ///////////////////////////////////////////////////////////////////////////////
+${B_NOVO}                  xpath=//android.widget.Button[@resource-id="br.com.pztec.estoque:id/Button1"]
 ${B_MENU}                  id=br.com.pztec.estoque:id/Button3
 ${B_DELETAR}               xpath=//android.widget.Button[@resource-id="br.com.pztec.estoque:id/deletar"]
 ${B_EDITAR}                xpath=//android.widget.Button[@resource-id="br.com.pztec.estoque:id/editar"]
-${B_ENTRADA}               xpath=///android.widget.Button[@resource-id="br.com.pztec.estoque:id/entrada"]
+${B_ENTRADA}               xpath=//android.widget.Button[@resource-id="br.com.pztec.estoque:id/entrada"]
 ${B_SAIDA}                 xpath=//android.widget.Button[@resource-id="br.com.pztec.estoque:id/saida"]
 ${B_SALVAR}                id=br.com.pztec.estoque:id/btn_gravar_assunto
+${B_SALVAR_ADD}            id=br.com.pztec.estoque:id/btn_salvar
 ${SIM_EXCLUSAO}            xpath=//android.widget.Button[@resource-id="android:id/button1"]
 ${NAO_EXCLUSAO}            xpath=//android.widget.Button[@resource-id="android:id/button2"]
-#CAMPOS ///////////////////////////////////////
+#CAMPOS //////////////////////////////////////////////////////////////////////////////
 ${C_CODIGO}                xpath=//android.widget.EditText[@resource-id="br.com.pztec.estoque:id/txt_codigo"]
 ${C_DESCRICAO}             xpath=//android.widget.EditText[@resource-id="br.com.pztec.estoque:id/txt_descricao"]
 ${C_UNIDADE}               xpath=//android.widget.EditText[@resource-id="br.com.pztec.estoque:id/txt_unidade"]
@@ -36,7 +38,7 @@ ${C_DOC_REF}               xpath=//android.widget.EditText[@resource-id="br.com.
 ${C_DIM_ESTOQUE}           xpath=//android.widget.EditText[@resource-id="br.com.pztec.estoque:id/txt_qtdsaida"]
 ${C_LOCALIZAR}             id=android:id/search_src_text
 
-#TEXTO ///////////////////////////////////////
+#TEXTO /////////////////////////////////////////////////////////////////////////////////
 ${ID}                      xpath=//android.widget.TextView[@text="ID"]   #
 ${R_ID}                    xpath=//android.widget.TextView[@resource-id="br.com.pztec.estoque:id/txt_idprod"]
 ${CODIGO}                  xpath=//android.widget.TextView[@text="Código"]
@@ -66,14 +68,15 @@ ${T_DIM_ESTOQUE_CIMA}      xpath=//android.widget.TextView[@resource-id="br.com.
 ${T_DIM_ESTOQUE}           xpath=(//android.widget.TextView[@text="Diminuir estoque"])[2]
 ${T_CONF_EXCLUSAO}         id=android:id/contentPanel
 
-#MENSAGEM //////////////////////////////////
+#MENSAGEM ////////////////////////////////////////////////////////////////////////////
 ${CONF_EXCLUSAO}           xpath=/hierarchy/android.widget.FrameLayout
 ${T_MENSAGEM}              xpath=//android.widget.TextView[@resource-id="android:id/alertTitle"]
 ${T_CONF_EXCLUSAO}         xpath=//android.widget.TextView[@resource-id="android:id/message"]
 
-#PESQUISAR////////////////////////////////////////////////////////
+#PESQUISAR////////////////////////////////////////////////////////////////////////////
 ${B_PESUISAR}              id=android:id/search_button     
 ${C_PESUISAR}              id=android:id/search_src_text  
+
 
 *** Keywords ***
 
@@ -81,6 +84,7 @@ ${C_PESUISAR}              id=android:id/search_src_text
 Dado que o cliente está na página inicial
     verifica elemento    ${PAGINA_INICIAL}
 Quando ele clica em Novo
+    Espera o elemento e visualiza o conteúdo    ${B_NOVO}
     Espera o elemento e clica nele    ${B_NOVO}
 Então deve conter os elementos da funcionalidade Novo
     Verifica elemento                ${C_CODIGO}   
@@ -102,19 +106,26 @@ Então deve conter os elementos da funcionalidade Novo
 
 #1 & 2 ///////////////////////////////////
 E preenche o campo Código
+    Espera o elemento e visualiza o conteúdo    ${C_CODIGO} 
     Espera o elemento e inputa um texto    ${C_CODIGO}    1420
 
 E preenche o campo Descrição
+    Espera o elemento e visualiza o conteúdo    ${C_DESCRICAO}
     Espera o elemento e inputa um texto    ${C_DESCRICAO}    alguma coisa
 E preenche o campo Unidade
+    Espera o elemento e visualiza o conteúdo    ${C_UNIDADE}    
     Espera o elemento e inputa um texto    ${C_UNIDADE}    30
 E preenche o campo Quantidade
+    Espera o elemento e visualiza o conteúdo    ${C_QUANTIDADE}    
     Espera o elemento e inputa um texto    ${C_QUANTIDADE}    6.0
 E preenche o campo Val.Unit
+    Espera o elemento e visualiza o conteúdo    ${C_VALUNIT}
     Espera o elemento e inputa um texto    ${C_VALUNIT}    6.0
 E preenche o campo Lote
+    Espera o elemento e visualiza o conteúdo    ${C_LOTE}
     Espera o elemento e inputa um texto    ${C_LOTE}    6.0
 E confirma operação
+    Espera o elemento e visualiza o conteúdo    ${B_SALVAR}
     Espera o elemento e clica nele    ${B_SALVAR}
 Então deve ser possível cadastrar um produto com sucesso
     Espera o elemento e verifica conteúdo    ${CODIGO}    1420
@@ -127,43 +138,56 @@ Então deve ser possível cadastrar um produto com sucesso
 
 #03////////////////////////////////////////
 E tem um produto cadastrado
+    Espera o elemento e visualiza o conteúdo    ${B_NOVO}
     Espera o elemento e clica nele    ${B_NOVO}
     Espera o elemento e inputa um texto    ${C_DESCRICAO}    Chileno
     Espera o elemento e inputa um texto    ${C_QUANTIDADE}    50
     Espera o elemento e inputa um texto    ${C_VALUNIT}    100
-    Espera o elemento e clica nele    ${B_SALVAR}
+    Espera o elemento e clica nele    ${B_SALVAR_ADD}
 
 Quando ele clica em Entrada
+    Espera o elemento e visualiza o conteúdo    ${B_ENTRADA}
     Espera o elemento e clica nele    ${B_ENTRADA}
 E preenche o campo Adicionar Estoque
+    Espera o elemento e visualiza o conteúdo    ${C_ADD_ESTOQUE}
     Espera o elemento e inputa um texto    ${C_ADD_ESTOQUE}    6.0
 Então deve ser possível acrescentar um produto com sucesso
+    Espera o elemento e visualiza o conteúdo    ${QUANTIDADE}
     Espera o elemento e verifica conteúdo    ${QUANTIDADE}    7.0
 
 #04///////////////////////////////////////
 Quando ele clica em Saída
+    Espera o elemento e visualiza o conteúdo    ${B_SAIDA}
     Espera o elemento e clica nele    ${B_SAIDA}
 E preenche o campo Diminuir Estoque
+    Espera o elemento e visualiza o conteúdo    ${C_DIM_ESTOQUE}
     Espera o elemento e inputa um texto    ${C_DIM_ESTOQUE}    1.0
 Então deve ser possível decrementar um produto com sucesso
+    Espera o elemento e visualiza o conteúdo    ${QUANTIDADE}
     Espera o elemento e inputa um texto    ${QUANTIDADE}     5.0
 
 #05////////////////////////////////////
 Quando ele clica em editar
+    Espera o elemento e visualiza o conteúdo    ${B_EDITAR}
     Espera o elemento e clica nele    ${B_EDITAR}
 E altera o campo Descrição
+    Espera o elemento e visualiza o conteúdo    ${C_DESCRICAO}
     Espera o elemento e inputa um texto    ${C_DESCRICAO}    PlayStation
 E altera o campo Quantidade
-        Espera o elemento e inputa um texto    ${C_QUANTIDADE}    50
+    Espera o elemento e visualiza o conteúdo    ${C_QUANTIDADE}
+    Espera o elemento e inputa um texto    ${C_QUANTIDADE}    50
 E altera o campo Val.Unit
+    Espera o elemento e visualiza o conteúdo    ${C_VALUNIT}
     Espera o elemento e inputa um texto    ${C_VALUNIT}    2000
 Então deve ser possível editar um produto com sucesso
     Espera o elemento e visualiza o conteúdo   ${PRODUTO_ACHADO1}
 #06/////////////////////////////////////
 Quando ele clica em excluir
+    Espera o elemento e visualiza o conteúdo    ${B_DELETAR}
     Espera o elemento e clica nele    ${B_DELETAR}
 E confirma operação de exclusão
     Espera o elemento e visualiza o conteúdo    ${T_CONF_EXCLUSAO}    
+    Espera o elemento e visualiza o conteúdo    ${SIM_EXCLUSAO}
     Espera o elemento e clica nele    ${SIM_EXCLUSAO}
 
 Então deve ser possível excluir um produto com sucesso
@@ -171,6 +195,7 @@ Então deve ser possível excluir um produto com sucesso
 #7//////////////////////////////////////
 E desconfirma operação
     Espera o elemento e visualiza o conteúdo    ${T_CONF_EXCLUSAO}    
+    Espera o elemento e visualiza o conteúdo    ${NAO_EXCLUSAO}
     Espera o elemento e clica nele    ${NAO_EXCLUSAO}
 Então deve ser possível cancelar exclusão de um produto com sucesso
     Espera o elemento e verifica conteúdo    ${CODIGO}    1420
@@ -183,28 +208,34 @@ Então deve ser possível cancelar exclusão de um produto com sucesso
 
 #8//////////////////////////////////////
 Quando ele clica em pesquisar
+    Espera o elemento e visualiza o conteúdo    ${B_PESUISAR}
     Espera o elemento e clica nele    ${B_PESUISAR}
 E preenche com um valor conhecido de Quantidade
+    Espera o elemento e visualiza o conteúdo    ${C_PESUISAR}
     Espera o elemento e inputa um texto    ${C_PESUISAR}    40
 Então deve ser possível pesquisar um produto com sucesso
     Espera o elemento e visualiza o conteúdo    ${PRODUTO_ACHADO1}    
 
 #9//////////////////////////////////////
 E preenche com um valor conhecido de Unidade
+    Espera o elemento e visualiza o conteúdo    ${C_PESUISAR}
     Espera o elemento e inputa um texto    ${C_PESUISAR}    3
 
 #10/////////////////////////////////////
 E preenche com um valor conhecido de Descrição
+    Espera o elemento e visualiza o conteúdo    ${C_PESUISAR}
     Espera o elemento e inputa um texto    ${C_PESUISAR}    PLayStation 2
 
 #11/////////////////////////////////////
 E preenche com um valor conhecido de Val.Unit
+    Espera o elemento e visualiza o conteúdo    ${C_PESUISAR}
     Espera o elemento e inputa um texto    ${C_PESUISAR}    2500
 
 #12/////////////////////////////////////
 Quando ele achar um produto
+    Espera o elemento e visualiza o conteúdo    ${B_PESUISAR}
     Espera o elemento e clica nele    ${B_PESUISAR}
-    Espera o elemento e inputa um texto    ${C_PESUISAR}    40
+    Espera o elemento e visualiza o conteúdo    ${C_PESUISAR}
     Espera o elemento e inputa um texto    ${C_PESUISAR}    PLayStation 2
     Espera o elemento e visualiza o conteúdo    ${PRODUTO_ACHADO1}    
 Então deve ser possível identificar o campo ID 
@@ -212,6 +243,24 @@ Então deve ser possível identificar o campo ID
     Espera o elemento e visualiza o conteúdo    ${R_ID}
 E deve ser possível identificar o campo Grupo
     Espera o elemento e visualiza o conteúdo    ${GRUPO}
+
+##EXTRA###########CADASTRAR VARIOS PRODUTOS////////////////////
+Deve cadastrar vários produtos
+    [Arguments]    ${DSCR}    ${QTD}    ${VLUN}
+    Dado que o cliente está na página inicial
+    Quando ele clica em Novo
+    Espera o elemento e visualiza o conteúdo    ${C_DESCRICAO}
+    Espera o elemento e inputa um texto         ${C_DESCRICAO}          ${DSCR}
+    Espera o elemento e visualiza o conteúdo    ${C_QUANTIDADE}
+    Espera o elemento e inputa um texto         ${C_QUANTIDADE}         ${QTD}
+    Espera o elemento e visualiza o conteúdo    ${C_VALUNIT}
+    Espera o elemento e inputa um texto         ${C_VALUNIT}            ${VLUN}
+    Espera o elemento e visualiza o conteúdo    ${B_SALVAR}
+    Espera o elemento e clica nele              ${B_SALVAR}
+    Espera o elemento e visualiza o conteúdo    ${PRODUTO_ACHADO1}
+    Espera o elemento e verifica conteúdo       ${DESCRICAO}            ${DSCR}
+
+
 #BAD REQUEST ///////////////////////////
 #13/////////////////////////////////////
 Então não deve ser possível cadastrar um produto com sucesso
@@ -226,6 +275,7 @@ Então não deve ser possível cadastrar um produto com sucesso
     Verifica que elemento não está presente    ${CODIGO}    1420
 
 #14/////////////////////////////////////
+
 Não deve ser possível cadastrar sem preencher o campos Quantidade
     Espera o elemento e clica nele    ${B_NOVO}
     Espera o elemento e inputa um texto    ${C_CODIGO}    1420
@@ -237,6 +287,7 @@ Não deve ser possível cadastrar sem preencher o campos Quantidade
     Verifica que elemento não está presente    ${CODIGO}    1420
 
 #15/////////////////////////////////////
+
 Não deve ser possível cadastrar sem preencher o campo Val.Unit
     Espera o elemento e clica nele    ${B_NOVO}
     Espera o elemento e inputa um texto    ${C_CODIGO}    1420

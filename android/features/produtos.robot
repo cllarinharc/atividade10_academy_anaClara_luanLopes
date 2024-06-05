@@ -2,7 +2,9 @@
 Library    AppiumLibrary
 Resource    ../base.robot
 Resource    ../pages/produtos.page.robot
-
+Test Timeout    4 minutes
+Test Setup        Abrir App
+Test Teardown     Teardown
 
 *** Test Cases ***
 TC:00-Deve ser possíevl acessar o Novo
@@ -109,6 +111,13 @@ TC:12-Deve ser possível ver a própriedade ID e Grupo após cadastrar um produt
     Quando ele achar um produto
     Então deve ser possível identificar o campo ID 
     E deve ser possível identificar o campo Grupo
+
+TC:Extra- Deve ser possível cadastrar vários produtos
+    [Template]    Deve cadastrar vários produtos
+        ICO    30    90
+        Shadow Of the Colossus    12    150
+        The Last Guardian    50    200
+        
 
 #BAD REQUEST
 TC:13-Não deve ser possível cadastrar sem preencher o campo Descrição
