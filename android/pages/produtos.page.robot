@@ -264,7 +264,6 @@ Deve cadastrar vários produtos
 #BAD REQUEST ///////////////////////////
 #13/////////////////////////////////////
 Então não deve ser possível cadastrar um produto com sucesso
-
     Espera o elemento e clica nele    ${B_NOVO}
     Espera o elemento e inputa um texto    ${C_CODIGO}    1420
     Espera o elemento e inputa um texto    ${C_DESCRICAO}    ''
@@ -310,7 +309,6 @@ Então não deve ser possível preencher o campo Quantidade com teclado não num
 
 #17/////////////////////////////////////
 Então não deve ser possível preencher o campo Val.Unitcom teclado não numérico
-
     Espera o elemento e clica nele    ${B_NOVO}
     Espera o elemento e inputa um texto    ${C_CODIGO}    1420
     Espera o elemento e inputa um texto    ${C_DESCRICAO}    PLayStation 21
