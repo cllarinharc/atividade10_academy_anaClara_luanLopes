@@ -215,22 +215,63 @@ E deve ser possível identificar o campo Grupo
 #BAD REQUEST ///////////////////////////
 #13/////////////////////////////////////
 Então não deve ser possível cadastrar um produto com sucesso
-
+    Espera o elemento e clica nele    ${B_NOVO}
+    Espera o elemento e inputa um texto    ${C_CODIGO}    1420
+    Espera o elemento e inputa um texto    ${C_DESCRICAO}    ''
+    Espera o elemento e inputa um texto    ${C_UNIDADE}    ''
+    Espera o elemento e inputa um texto    ${C_QUANTIDADE}    ''
+    Espera o elemento e inputa um texto    ${C_VALUNIT}    ''
+    Espera o elemento e inputa um texto    ${C_LOTE}    ''
+    Espera o elemento e clica nele    ${B_SALVAR}
+    Verifica que elemento não está presente    ${CODIGO}    1420
 
 #14/////////////////////////////////////
-
+Não deve ser possível cadastrar sem preencher o campos Quantidade
+    Espera o elemento e clica nele    ${B_NOVO}
+    Espera o elemento e inputa um texto    ${C_CODIGO}    1420
+    Espera o elemento e inputa um texto    ${C_DESCRICAO}    PLayStation 5
+    Espera o elemento e inputa um texto    ${C_UNIDADE}    2
+    Espera o elemento e inputa um texto    ${C_VALUNIT}    10.0
+    Espera o elemento e inputa um texto    ${C_LOTE}    Lote1
+    Espera o elemento e clica nele    ${B_SALVAR}
+    Verifica que elemento não está presente    ${CODIGO}    1420
 
 #15/////////////////////////////////////
-
+Não deve ser possível cadastrar sem preencher o campo Val.Unit
+    Espera o elemento e clica nele    ${B_NOVO}
+    Espera o elemento e inputa um texto    ${C_CODIGO}    1420
+    Espera o elemento e inputa um texto    ${C_DESCRICAO}    PLayStation 3
+    Espera o elemento e inputa um texto    ${C_UNIDADE}    3
+    Espera o elemento e inputa um texto    ${C_QUANTIDADE}    10.0
+    Espera o elemento e inputa um texto    ${C_LOTE}    Lote1
+    Espera o elemento e clica nele    ${B_SALVAR}
+    Verifica que elemento não está presente    ${CODIGO}    1420
 
 #16/////////////////////////////////////
 Então não deve ser possível preencher o campo Quantidade com teclado não numérico
+    Espera o elemento e clica nele    ${B_NOVO}
+    Espera o elemento e inputa um texto    ${C_CODIGO}    1420
+    Espera o elemento e inputa um texto    ${C_DESCRICAO}    PLayStation 1
+    Espera o elemento e inputa um texto    ${C_UNIDADE}    2
+    Espera o elemento e inputa um texto    ${C_QUANTIDADE}    texto
+    Verifica que elemento não contém texto    ${C_QUANTIDADE}    texto
 
 #17/////////////////////////////////////
 Então não deve ser possível preencher o campo Val.Unitcom teclado não numérico
-
+    Espera o elemento e clica nele    ${B_NOVO}
+    Espera o elemento e inputa um texto    ${C_CODIGO}    1420
+    Espera o elemento e inputa um texto    ${C_DESCRICAO}    PLayStation 21
+    Espera o elemento e inputa um texto    ${C_UNIDADE}    1
+    Espera o elemento e inputa um texto    ${C_QUANTIDADE}    10.0
+    Espera o elemento e inputa um texto    ${C_VALUNIT}    texto
+    Verifica que elemento não contém texto    ${C_VALUNIT}    texto
 
 #18/////////////////////////////////////
 E preenche o campo Diminuir Estoque em 25 Unidades
-
-Então não deve ser possível decrementar um produto com sucesso
+    Espera o elemento e clica nele    ${B_SAIDA}
+    Espera o elemento e inputa um texto    ${C_DIM_ESTOQUE}    25.0
+    Espera o elemento e clica nele    ${B_SALVAR}
+    Verifica que elemento não está presente    ${QUANTIDADE}    -15.0
+    Espera o elemento e clica nele    ${B_SALVAR}
+    Verifica mensagem de erro    Estoque insuficiente
+    Espera o elemento e verifica conteúdo    ${QUANTIDADE}    6.0
